@@ -1,206 +1,173 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Animated Stopwatch with Theme Toggle</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pranav | Advanced Portfolio</title>
   <style>
     :root {
-      --bg-light: #f0f2f5;
-      --bg-dark: #1e1e1e;
-      --text-light: #333;
-      --text-dark: #f0f0f0;
-      --card-light: #fff;
-      --card-dark: #2c2c2c;
-      --shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    }
+      --primary: #8e2de2;
+      --secondary: #4a00e0;
+      --bg: #0f0f0f;
+      --text: #ffffff;
+      --accent: #ff6ec4;
+    }* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
 
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: var(--bg-light);
-      color: var(--text-light);
-      transition: background 0.4s, color 0.4s;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-    }
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #0f0f0f, #1a1a1a);
+  color: var(--text);
+  line-height: 1.6;
+}
 
-    body.dark {
-      background: var(--bg-dark);
-      color: var(--text-dark);
-    }
+header {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  padding: 3rem 1rem;
+  text-align: center;
+  position: relative;
+}
 
-    .toggle-theme {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-    }
+header h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
 
-    .switch {
-      position: relative;
-      display: inline-block;
-      width: 60px;
-      height: 34px;
-    }
+header p {
+  font-size: 1.2rem;
+  color: #e0e0e0;
+}
 
-    .switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  background: #111;
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
 
-    .slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0; left: 0;
-      right: 0; bottom: 0;
-      background-color: #ccc;
-      transition: .4s;
-      border-radius: 34px;
-    }
+nav a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
 
-    .slider:before {
-      position: absolute;
-      content: "";
-      height: 26px; width: 26px;
-      left: 4px; bottom: 4px;
-      background-color: white;
-      transition: .4s;
-      border-radius: 50%;
-    }
+nav a:hover {
+  color: var(--accent);
+}
 
-    input:checked + .slider {
-      background-color: #2196F3;
-    }
+section {
+  padding: 6rem 2rem;
+  max-width: 1000px;
+  margin: auto;
+}
 
-    input:checked + .slider:before {
-      transform: translateX(26px);
-    }
+section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--accent);
+  position: relative;
+}
 
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 30px;
-      animation: fadeInDown 0.6s ease-out;
-    }
+section h2::after {
+  content: '';
+  width: 50px;
+  height: 4px;
+  background: var(--accent);
+  display: block;
+  margin-top: 0.5rem;
+}
 
-    #display {
-      font-size: 2.8rem;
-      margin-bottom: 20px;
-      background: var(--card-light);
-      padding: 20px 50px;
-      border-radius: 20px;
-      box-shadow: var(--shadow);
-      transition: 0.4s;
-      animation: pulse 1s infinite alternate;
-    }
+.projects .project {
+  background: #1e1e1e;
+  margin: 2rem 0;
+  padding: 2rem;
+  border-left: 5px solid var(--accent);
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(255, 110, 196, 0.3);
+  transition: transform 0.3s;
+}
 
-    body.dark #display {
-      background: var(--card-dark);
-    }
+.projects .project:hover {
+  transform: translateY(-5px);
+}
 
-    .buttons button {
-      font-size: 1.1rem;
-      padding: 10px 20px;
-      margin: 0 10px;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
+.project h3 {
+  margin-bottom: 0.5rem;
+}
 
-    .start { background-color: #28a745; color: white; }
-    .stop { background-color: #dc3545; color: white; }
-    .reset { background-color: #ffc107; color: black; }
+.project p {
+  color: #ccc;
+}
 
-    .buttons button:hover {
-      transform: scale(1.05);
-    }
+#contact p {
+  margin: 0.5rem 0;
+}
 
-    /* Animations */
-    @keyframes fadeInDown {
-      from {
-        transform: translateY(-20px);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
+footer {
+  background: #111;
+  color: #888;
+  text-align: center;
+  padding: 3rem 1rem;
+}
 
-    @keyframes pulse {
-      from {
-        box-shadow: 0 0 10px rgba(0,0,0,0.05);
-      }
-      to {
-        box-shadow: 0 0 20px rgba(0,0,0,0.15);
-      }
-    }
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2.2rem;
+  }
+
+  section h2 {
+    font-size: 2rem;
+  }
+}
+
   </style>
 </head>
 <body>
+  <header>
+    <h1>Pranav's Portfolio</h1>
+    <p>Engineer | Developer | Innovator</p>
+  </header>  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>  <section id="home">
+    <h2>Welcome</h2>
+    <p>Welcome to my portfolio. I’m Pranav, passionate about building intelligent IoT systems, modern web applications, and scalable cloud solutions. My goal is to blend creativity and code to solve real-world problems.</p>
+  </section>  <section id="about">
+    <h2>About Me</h2>
+    <p>I am currently pursuing engineering and have a deep interest in the intersection of software and hardware. Whether it’s a smart road divider or a full-stack learning platform, I enjoy the challenge of making things that matter.</p>
+  </section>  <section id="projects" class="projects">
+    <h2>Projects</h2><div class="project">
+  <h3>Smart Road Divider</h3>
+  <p>IoT-based dynamic lane management system using sensors and microcontrollers for real-time traffic optimization and road safety improvements.</p>
+</div>
 
-  <!-- Theme Toggle -->
-  <div class="toggle-theme">
-    <label class="switch">
-      <input type="checkbox" id="themeToggle">
-      <span class="slider"></span>
-    </label>
-  </div>
+<div class="project">
+  <h3>Startup Website</h3>
+  <p>Developed a fast, responsive website for a startup with animated components, custom branding, and mobile-first design using HTML5, CSS3, and JS.</p>
+</div>
 
-  <h1>Stopwatch</h1>
-  <div id="display">00:00:00</div>
-  <div class="buttons">
-    <button class="start" onclick="start()">Start</button>
-    <button class="stop" onclick="stop()">Stop</button>
-    <button class="reset" onclick="reset()">Reset</button>
-  </div>
+<div class="project">
+  <h3>E-Learning Website</h3>
+  <p>Created an online education platform with interactive course listings, smooth navigation, and responsive layout for all screen sizes.</p>
+</div>
 
-  <script>
-    let startTime, interval;
-    let elapsed = 0;
-    let running = false;
-
-    function updateDisplay() {
-      const time = Date.now() - startTime + elapsed;
-      const milliseconds = Math.floor((time % 1000) / 10);
-      const seconds = Math.floor((time / 1000) % 60);
-      const minutes = Math.floor((time / (1000 * 60)) % 60);
-      document.getElementById("display").textContent =
-        `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}:${String(milliseconds).padStart(2, '0')}`;
-    }
-
-    function start() {
-      if (!running) {
-        running = true;
-        startTime = Date.now();
-        interval = setInterval(updateDisplay, 50);
-      }
-    }
-
-    function stop() {
-      if (running) {
-        running = false;
-        elapsed += Date.now() - startTime;
-        clearInterval(interval);
-      }
-    }
-
-    function reset() {
-      running = false;
-      clearInterval(interval);
-      elapsed = 0;
-      document.getElementById("display").textContent = "00:00:00";
-    }
-
-    // Theme Toggle
-    const toggle = document.getElementById("themeToggle");
-    toggle.addEventListener("change", () => {
-      document.body.classList.toggle("dark", toggle.checked);
-    });
-  </script>
-
+  </section>  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email: paratepranav29@gmail.com</p>
+    <p>LinkedIn: https://www.linkedin.com/in/pranav-parate-6a4255365?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app </p>
+    <p>GitHub:https://github.com/Pranav2-coder </p>
+  </section>  <footer>
+    <p> Designed with passion and precision.</p>
+  </footer>
 </body>
 </html>
